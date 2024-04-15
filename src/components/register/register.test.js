@@ -1,5 +1,4 @@
-import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { render, screen, fireEvent } from "@testing-library/react";
 import Register from "./Register";
 
 describe("Register component", () => {
@@ -19,12 +18,12 @@ describe("Register component", () => {
     expect(element).toBeInTheDocument();
   });
 
-  it("should show error message when all the fields are not entered", async () => {
+  it("should show error message when all the fields are not entered", () => {
     render(<Register />);
     const buttonElement = screen.getByRole("button", {
       name: /register/i
     });
-    await userEvent.click(buttonElement);
+    fireEvent.click(buttonElement); // Use fireEvent to simulate button click
     const alertElement = screen.getByRole("alert");
     expect(alertElement).toBeInTheDocument();
   });
@@ -35,12 +34,12 @@ describe("Register component", () => {
     expect(alertElement).not.toBeInTheDocument();
   });
 
-  it("should show success message when the registration is successful.", async () => {
+  it("should show success message when the registration is successful.", () => {
     render(<Register />);
     const buttonElement = screen.getByRole("button", {
       name: /register/i
     });
-    await userEvent.click(buttonElement);
+    fireEvent.click(buttonElement); // Use fireEvent to simulate button click
     const alertElement = screen.getByRole("alert");
     expect(alertElement).toBeInTheDocument();
   });
